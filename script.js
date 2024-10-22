@@ -27,9 +27,28 @@ buttonIn.addEventListener('click', () => {
         password: seq(p1.value)
     }
     if (userData.name != '' && userData.password != ''){
-        addUser()
-        clearFields([n1, p1])
-        writeNot2(true)
+        checkUser()
+            .then((data) => {
+                return data.json()
+            })
+            .then((data) => {  
+                if (data != ''){
+                    data.forEach(i => {
+                        if (seq(userData.name) == seq(i.name) && seq(userData.password) == seq(i.password)){
+                            console.log(data)
+                            writeNot2(false)
+                        }else{
+                            addUser()
+                            clearFields([n1, p1])
+                            writeNot2(true)
+                        }
+                    })
+                }else{
+                    addUser()
+                    clearFields([n1, p1])
+                    writeNot2(true)
+                }
+            })
     }
     else{
         writeNot2(false)
