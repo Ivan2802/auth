@@ -173,3 +173,29 @@ function setUnAuth(){
 
 
 
+// Add page -------------------------------------------------
+
+let urlAddPage = 'https://95afdd0ceb9eb27c.mokky.dev/add_page'
+dataAddPage = {
+    name: 'user1',
+    data: 'New user page!'
+}
+
+function addPage(){
+    return fetch(urlAddPage, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dataAddPage)
+    })
+}
+
+
+btnAddPaage = document.querySelector('.add_page')
+btnAddPaage.addEventListener('click', () => {
+    addPage()
+        .then(() => {
+            // run python file
+        })
+})
